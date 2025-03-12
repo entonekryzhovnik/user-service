@@ -1,4 +1,4 @@
-module user-service
+module github.com/entonekryzhovnik/user-service
 
 go 1.23.7
 
