@@ -2,12 +2,12 @@ package server
 
 import (
 	"fmt"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 	"user-service/gen/go/userpb"
 	"user-service/internal/service"
-
-	"google.golang.org/grpc"
 )
 
 func StartGRPCServer(userService *service.UserService) {
@@ -17,6 +17,7 @@ func StartGRPCServer(userService *service.UserService) {
 	}
 
 	grpcServer := grpc.NewServer()
+	reflection.Register(grpcServer)
 	userpb.RegisterUserServiceServer(grpcServer, userService)
 
 	fmt.Println("gRPC Server is running on port 50051")
