@@ -2,12 +2,12 @@ package server
 
 import (
 	"fmt"
+	"github.com/entonekryzhovnik/user-service/gen/go/userpb"
+	"github.com/entonekryzhovnik/user-service/internal/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-	"user-service/gen/go/userpb"
-	"user-service/internal/service"
 )
 
 func StartGRPCServer(userService *service.UserService) {

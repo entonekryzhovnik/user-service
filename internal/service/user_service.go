@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"user-service/gen/go/userpb"
-	"user-service/internal/repository"
+	"github.com/entonekryzhovnik/user-service/gen/go/userpb"
+	"github.com/entonekryzhovnik/user-service/internal/repository"
 )
 
 type UserService struct {

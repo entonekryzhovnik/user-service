@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 	"errors"
-	"user-service/gen/go/userpb"
+	"github.com/entonekryzhovnik/user-service/gen/go/userpb"
 )
 
 type UserRepository struct {

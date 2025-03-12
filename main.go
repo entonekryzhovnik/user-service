@@ -1,10 +1,10 @@
 package main
 
 import (
-	"user-service/config"
-	"user-service/internal/repository"
-	"user-service/internal/server"
-	"user-service/internal/service"
+	"github.com/entonekryzhovnik/user-service/config"
+	"github.com/entonekryzhovnik/user-service/internal/repository"
+	"github.com/entonekryzhovnik/user-service/internal/server"
+	"github.com/entonekryzhovnik/user-service/internal/service"
 )
 
 func main() {
