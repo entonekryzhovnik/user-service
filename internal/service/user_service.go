@@ -2,34 +2,28 @@ package service
 
 import (
 	"context"
-	"github.com/entonekryzhovnik/user-service/gen/go/userpb"
+
+	"github.com/entonekryzhovnik/user-service/internal/model"
 	"github.com/entonekryzhovnik/user-service/internal/repository"
 )
 
-type UserService struct {
-	repo *repository.UserRepository
-	userpb.UnimplementedUserServiceServer
+type UserService interface {
+	CreateUser(ctx context.Context, user model.User) (int64, error) // ✅ Принимаем model.User
+	GetUser(ctx context.Context, id int64) (*model.User, error)
 }
 
-func NewUserService(repo *repository.UserRepository) *UserService {
-	return &UserService{repo: repo}
+type userService struct {
+	repo repository.UserRepository
 }
 
-func (s *UserService) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*userpb.GetUserResponse, error) {
-	user, err := s.repo.GetUser(req.Id)
-	if err != nil {
-		return nil, err
-	}
-	if user == nil {
-		return nil, nil
-	}
-	return &userpb.GetUserResponse{User: user}, nil
+func NewUserService(repo repository.UserRepository) UserService {
+	return &userService{repo: repo}
 }
 
-func (s *UserService) CreateUser(ctx context.Context, req *userpb.CreateUserRequest) (*userpb.CreateUserResponse, error) {
-	id, err := s.repo.CreateUser(req.Email)
-	if err != nil {
-		return nil, err
-	}
-	return &userpb.CreateUserResponse{Id: id}, nil
+func (s *userService) CreateUser(ctx context.Context, user model.User) (int64, error) { // ✅ Принимаем model.User
+	return s.repo.CreateUser(user) // ✅ Передаем структуру в репозиторий
+}
+
+func (s *userService) GetUser(ctx context.Context, id int64) (*model.User, error) {
+	return s.repo.GetUser(id)
 }
